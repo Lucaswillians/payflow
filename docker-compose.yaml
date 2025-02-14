@@ -1,33 +1,22 @@
 services:
-  postgres:
-    image: postgres:latest
+  mysql:
+    image: mysql:latest
     environment:
-      POSTGRES_USER: ${DB_USERNAME}
-      POSTGRES_PASSWORD: ${DB_PASSWORD}
-      PGDATA: /data/postgres
+      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
+      MYSQL_DATABASE: ${DB_NAME}
+      MYSQL_USER: ${DB_USERNAME}
+      MYSQL_PASSWORD: ${DB_PASSWORD}
     volumes:
-       - postgres:/data/postgres
+      - mysql:/var/lib/mysql
     ports:
-      - "5432:5432"
+      - "3306:3306"
     networks:
-      - postgres
+      - mysql
     restart: unless-stopped
 
-  pgadmin:
-    image: dpage/pgadmin4
-    environment:
-      PGADMIN_DEFAULT_EMAIL: ${DB_ADMIN_EMAIL}
-      PGADMIN_DEFAULT_PASSWORD: ${DB_PASSWORD}
-    ports:
-      - "8081:80"
-    depends_on:
-      - postgres
-    networks:
-      - postgres
-
 networks:
-  postgres:
+  mysql:
     driver: bridge
 
 volumes:
-    postgres:
+  mysql:
