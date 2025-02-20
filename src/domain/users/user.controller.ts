@@ -1,4 +1,4 @@
-import { Body, Controller, HttpCode, HttpStatus, Inject, Post } from "@nestjs/common";
+import { Body, Controller, Get, HttpCode, HttpStatus, Inject, Param, Post } from "@nestjs/common";
 import { UserService } from "./user.service";
 import { CreateUserDto } from "./dtos/createUser.dto";
 import { UserDto } from "./dtos/user.dto";
@@ -16,4 +16,8 @@ export class UserController {
     return plainToInstance(UserDto, user)
   }
 
+  @Get('/:id')
+  async findOne (@Param('id') id: number) {
+    return await this.userService.getUser(id);
+  }
 }
