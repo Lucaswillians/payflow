@@ -21,11 +21,14 @@ export class WalletController {
   async updateWallet(@Param('userId', ParseIntPipe) userId: number, @Body() dto: UpdateWalletDto): Promise<WalletDto> {
     let wallet: WalletEntity;
 
-    if (dto.operation === 'credit') wallet = await this.walletService.credit(userId, dto.amount);
-   
-    if (dto.operation === 'debit') wallet = await this.walletService.debit(userId, dto.amount); 
-    
-    else throw new BadRequestException('Invalid operation');
+    if (dto.operation === 'credit') {
+      wallet = await this.walletService.credit(userId, dto.amount);
+    } else if (dto.operation === 'debit') {
+      wallet = await this.walletService.debit(userId, dto.amount);
+    } else {
+      throw new BadRequestException('Invalid operation');
+    }
+
   
     return plainToInstance(WalletDto, wallet);
   }

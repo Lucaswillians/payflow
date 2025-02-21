@@ -3,6 +3,7 @@ import { EmailNotifier } from "src/services/notifier/email.notifier";
 import { Repository } from "typeorm";
 import { NotificationEntity } from "./notification.entity";
 import { UserService } from "../users/user.service";
+import { InjectRepository } from "@nestjs/typeorm";
 
 @Injectable()
 export class NotificationService {
@@ -11,8 +12,8 @@ export class NotificationService {
   @Inject()
   private readonly emailNotifier: EmailNotifier;
 
-  @Inject()
-  private readonly notificationRepository: Repository<NotificationEntity>;
+  @InjectRepository(NotificationEntity)
+  private readonly notificationRepository: Repository<NotificationEntity>
   
   @Inject()
   private readonly userService: UserService;

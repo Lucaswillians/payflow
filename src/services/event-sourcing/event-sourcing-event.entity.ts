@@ -22,6 +22,6 @@ export class EventSourcingEventEntity {
   @Column('json')
   payload: any;
 
-  @CreateDateColumn({ name: 'created_at', type: 'timestamptz' })
+  @CreateDateColumn({ name: 'created_at', type: 'timestamp' })
   createdAt: Date;
 }

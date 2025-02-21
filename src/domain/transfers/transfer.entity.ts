@@ -14,7 +14,7 @@ export class TransferEntity {
   @Column({ type: 'decimal', precision: 10, scale: 2 })
   amount: number;
 
-  @Column({ type: 'timestamptz' })
+  @Column({ type: 'timestamp' })
   date: Date;
 
   constructor(payerId: number, payeeId: number, amount: number) {

@@ -12,7 +12,7 @@ export class NotificationEntity {
   @Column()
   message: string;
 
-  @Column({ type: 'timestamptz' })
+  @Column({ type: 'timestamp' })
   date: Date;
 
   constructor(userId: number, message: string, date: Date = new Date()) {
