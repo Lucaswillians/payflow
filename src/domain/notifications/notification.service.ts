@@ -30,4 +30,8 @@ export class NotificationService {
 
     this.logger.debug(`Notification sent to user ${userId}: ${message}`);
   }
+
+  async findByUserId(userId: number): Promise<NotificationEntity[]> {
+    return this.notificationRepository.find({ where: { userId } });
+  }
 }
